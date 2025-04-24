@@ -1,61 +1,336 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# YukPerpus! 📚
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-12-red)
+![PHP](https://img.shields.io/badge/PHP-8.4-blue)
 
-## About Laravel
+**YukPerpus!** is a simple online library application developed as a university assignment at Pelita Bangsa University, Semester 4. This project is built using Laravel 12 with a modern and futuristic dark-themed UI, inspired by the Monet Engine (Material You) from Android 12+. The application supports authentication for two user roles: **admin** and **user**, each with their own dedicated dashboard.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Key Features
+- **User Authentication**:
+  - Login and registration with a modern UI inspired by 2025 web trends (similar to Facebook).
+  - Support for two roles: `admin` and `user`.
+- **Role-Based Dashboards**:
+  If you want to test login then do this :
+  - User dashboard (`user@yukperpus.com`, password: `password123`).
+  - Admin dashboard (`admin@yukperpus.com`, password: `password`).
+- **Futuristic Design**:
+  - Dark theme with glow effects, gradients, and blur.
+  - Smooth animations on buttons and inputs.
+  - Modern color palette (neon blue, pastel purple) inspired by Monet Engine.
+- **Session Management**:
+  - Logout functionality via a button on the dashboard and dropdown in the header.
+  - Welcome message after successful login.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Technologies Used
+- **Backend**: Laravel 12 (PHP 8.4)
+- **Frontend**: Blade, Bootstrap 5.3, Vite
+- **Database**: MySQL
+- **Styling**: Custom CSS with futuristic effects (glow, blur, gradients)
+- **Font**: Inter (Google Fonts)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📋 Prerequisites
+Before running this project, ensure you have the following installed:
+- PHP 8.4 or higher
+- Composer
+- Node.js and NPM
+- MySQL
+- Git
 
-## Learning Laravel
+## 📸 Screenshots
+### Login Page
+![Login](login.png)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Register Page
+![Register](sign_in.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Dashboard
+![Dashboard](dashboard.png)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Installation Guide
+Follow these steps to set up and run the project on your local machine:
 
-## Laravel Sponsors
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/<your-username>/yukperpus.git
+   cd yukperpus
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. **Install PHP Dependencies**
+   ```bash
+   composer install
+   ```
 
-### Premium Partners
+3. **Install Frontend Dependencies**
+   ```bash
+   npm install
+   npm run build
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+4. **Configure Environment**
+   - Copy the `.env.example` file to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Open the `.env` file and update the database configuration:
+     ```env
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=yukperpus
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
+   - Generate the application key:
+     ```bash
+     php artisan key:generate
+     ```
 
-## Contributing
+5. **Run Database Migrations**
+   - Ensure the `yukperpus` database is created in MySQL.
+   - Run the migrations to create the tables:
+     ```bash
+     php artisan migrate
+     ```
+   - (Optional) Seed the database to create default users:
+     - Open `database/seeders/DatabaseSeeder.php` and add:
+       ```php
+       public function run()
+       {
+           \App\Models\User::create([
+               'name' => 'Admin',
+               'email' => 'admin@yukperpus.com',
+               'password' => bcrypt('password'),
+               'role' => 'admin',
+           ]);
+           \App\Models\User::create([
+               'name' => 'User',
+               'email' => 'user@yukperpus.com',
+               'password' => bcrypt('password123'),
+               'role' => 'user',
+           ]);
+       }
+       ```
+     - Run the seeder:
+       ```bash
+       php artisan db:seed
+       ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. **Run the Application**
+   ```bash
+   php artisan serve
+   ```
+   - Open `http://127.0.0.1:8000` in your browser.
 
-## Code of Conduct
+7. **Login Credentials**
+   - **Admin**: `admin@yukperpus.com` / `password`
+   - **User**: `user@yukperpus.com` / `password123`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🗄️ Database Structure
+The database includes the following table:
+- **users**:
+  - `id`: Primary key
+  - `name`: User's name
+  - `email`: User's email (unique)
+  - `password`: Password (hashed)
+  - `role`: User's role (`admin` or `user`)
+  - `telegram_id`: Telegram ID (optional)
+  - `email_verified_at`: Timestamp for email verification
+  - `remember_token`: Token for "remember me" functionality
+  - `created_at`, `updated_at`: Timestamps
 
-## Security Vulnerabilities
+## 🤝 Contributing
+We welcome contributions! Here's how you can contribute:
+1. Fork this repository.
+2. Create a new branch for your feature or bug fix:
+   ```bash
+   git checkout -b your-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin your-feature
+   ```
+5. Create a Pull Request on GitHub.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📜 License
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute as needed.
 
-## License
+## 📧 Contact
+For questions or suggestions, please reach out:
+- Email: gustiadityacreator07@gmail.com
+- GitHub: Gustyx-Power
+- Telegram: @GustyxPower
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+Thank you using YukPerpus! for Representations , We hope you find it useful! 🚀# YukPerpus! 📚
+
+![Laravel](https://img.shields.io/badge/Laravel-12-red)
+![PHP](https://img.shields.io/badge/PHP-8.4-blue)
+
+**YukPerpus!** is a simple online library application developed as a university assignment at Pelita Bangsa University, Semester 4. This project is built using Laravel 12 with a modern and futuristic dark-themed UI, inspired by the Monet Engine (Material You) from Android 12+. The application supports authentication for two user roles: **admin** and **user**, each with their own dedicated dashboard.
+
+## ✨ Key Features
+- **User Authentication**:
+  - Login and registration with a modern UI inspired by 2025 web trends (similar to Facebook).
+  - Support for two roles: `admin` and `user`.
+- **Role-Based Dashboards**:
+  - User dashboard (`user@yukperpus.com`, password: `password123`).
+  - Admin dashboard (`admin@yukperpus.com`, password: `password`).
+- **Futuristic Design**:
+  - Dark theme with glow effects, gradients, and blur.
+  - Smooth animations on buttons and inputs.
+  - Modern color palette (neon blue, pastel purple) inspired by Monet Engine.
+- **Session Management**:
+  - Logout functionality via a button on the dashboard and dropdown in the header.
+  - Welcome message after successful login.
+
+## 🛠️ Technologies Used
+- **Backend**: Laravel 12 (PHP 8.4)
+- **Frontend**: Blade, Bootstrap 5.3, Vite
+- **Database**: MySQL
+- **Styling**: Custom CSS with futuristic effects (glow, blur, gradients)
+- **Font**: Inter (Google Fonts)
+
+## 📋 Prerequisites
+Before running this project, ensure you have the following installed:
+- PHP 8.4 or higher
+- Composer
+- Node.js and NPM
+- MySQL
+- Git
+
+## 📸 Screenshots
+### Login Page
+![Login](login.png)
+
+### Register Page
+![Register](sign_in.png)
+
+### Dashboard
+![Dashboard](dashboard.png)
+
+## 🚀 Installation Guide
+Follow these steps to set up and run the project on your local machine:
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/<your-username>/yukperpus.git
+   cd yukperpus
+   ```
+
+2. **Install PHP Dependencies**
+   ```bash
+   composer install
+   ```
+
+3. **Install Frontend Dependencies**
+   ```bash
+   npm install
+   npm run build
+   ```
+
+4. **Configure Environment**
+   - Copy the `.env.example` file to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Open the `.env` file and update the database configuration:
+     ```env
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=yukperpus
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
+   - Generate the application key:
+     ```bash
+     php artisan key:generate
+     ```
+
+5. **Run Database Migrations**
+   - Ensure the `yukperpus` database is created in MySQL.
+   - Run the migrations to create the tables:
+     ```bash
+     php artisan migrate
+     ```
+   - (Optional) Seed the database to create default users:
+     - Open `database/seeders/DatabaseSeeder.php` and add:
+       ```php
+       public function run()
+       {
+           \App\Models\User::create([
+               'name' => 'Admin',
+               'email' => 'admin@yukperpus.com',
+               'password' => bcrypt('password'),
+               'role' => 'admin',
+           ]);
+           \App\Models\User::create([
+               'name' => 'User',
+               'email' => 'user@yukperpus.com',
+               'password' => bcrypt('password123'),
+               'role' => 'user',
+           ]);
+       }
+       ```
+     - Run the seeder:
+       ```bash
+       php artisan db:seed
+       ```
+
+6. **Run the Application**
+   ```bash
+   php artisan serve
+   ```
+   - Open `http://127.0.0.1:8000` in your browser.
+
+7. **Login Credentials**
+   - **Admin**: `admin@yukperpus.com` / `password`
+   - **User**: `user@yukperpus.com` / `password123`
+
+## 🗄️ Database Structure
+The database includes the following table:
+- **users**:
+  - `id`: Primary key
+  - `name`: User's name
+  - `email`: User's email (unique)
+  - `password`: Password (hashed)
+  - `role`: User's role (`admin` or `user`)
+  - `telegram_id`: Telegram ID (optional)
+  - `email_verified_at`: Timestamp for email verification
+  - `remember_token`: Token for "remember me" functionality
+  - `created_at`, `updated_at`: Timestamps
+
+## 🤝 Contributing
+We welcome contributions! Here's how you can contribute:
+1. Fork this repository.
+2. Create a new branch for your feature or bug fix:
+   ```bash
+   git checkout -b your-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin your-feature
+   ```
+5. Create a Pull Request on GitHub.
+
+## 📜 License
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute as needed.
+
+## 📧 Contact
+For questions or suggestions, please reach out:
+- Email: gustiadityacreator07@gmail.com
+- GitHub: Gustyx-Power
+- Telegram: @GustyxPower
+
+---
+
+Thank you using YukPerpus! for Representations , We hope you find it useful! 🚀
